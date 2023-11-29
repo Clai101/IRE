@@ -1,0 +1,193 @@
+\chapter{Ведение в математику p-адических чисел}
+\section{Строение пространства}
+
+\subsection*{Кольцо}
+
+Любое p-адичесое число $x$ можно предстваить как: 
+\begin{equation}
+    \label{def:p_adic}
+    x = p^\gamma \cfrac{m}{n}
+\end{equation}
+Где $p \in \mathbb{N}, \ n \in \mathbb{N}, 
+\ m \in \mathbb{Z}: \nexists y \in \mathbb{N} 
+\per \cfrac{p}{y} \in  \mathbb{N}$, 
+а также $p, \ n, \ m$ взаимно просты. 
+Любое p-адическое чиcло определено толко в пространстве $\mathbb{Q}_p$,
+где $p$ тоже что использовалось в определениие \ref{def:p_adic}. 
+Любое число из $\mathbb{Q}_p$ можно записать, как число из $\mathbb{Q}$
+и тогда сложение и произведение будет определно также как в $\mathbb{Q}$.
+Конечно же такие операции не выводят нас из кольца $\mathbb{Q}_p$:
+
+\begin{eqnarray}
+    \label{eq:prod}
+    p^{\gamma_1} \cfrac{m_1}{n_1} \cdot p^{\gamma_2} \cfrac{m_2}{n_2} = p^{\gamma_2+\gamma_1} \inner{\cfrac{m_2\cdot m_1}{n_2 \cdot n_1}}\\
+    \label{eq:add}
+    p^{\gamma_1} \cfrac{m_1}{n_1} + p^{\gamma_2} \cfrac{m_2}{n_2} = p^{\gamma_2} \inner{p^{\gamma_1} \cfrac{m_1}{n_1} + \cfrac{m_2}{n_2}}
+\end{eqnarray}
+
+Для \ref{eq:prod} так как $p$ - простое то мы не сможем выделить 
+из $\inner{\cfrac{m_2\cdot m_1}{n_2 \cdot n_1}}$ еще $p$.
+Для \ref{eq:add} я пологал что $\gamma_1 < \gamma_2$, 
+поэтому по анологии я уже не смогу вынести $p$ из скобок.
+
+\subsection*{Норма и метрика}
+
+Для построения протсранства в первую очередь требутся норма: 
+
+\begin{equation}
+    \label{def:norm}
+    \abs{x}_p = p^{-\gamma}
+\end{equation}
+
+Очень легко проверятся, что для такой 
+нормы выполняются все необходимы критерии, используя уже доказанные мною 
+првила сложения и умножения \ref{eq:prod} и \ref{eq:add}:
+\begin{itemize}
+    \item[1] $\abs{x}_p \geq 0$
+    \item[2] $\abs{x+y}_p \leq \abs{x}_p + \abs{y}_p$
+    \item[3] $\abs{xy}_p = \abs{x}_p \abs{y}_p$
+\end{itemize} 
+
+Пример:
+
+\begin{eqnarray*}
+    \abs{\cfrac{1}{2}}_2 = 2\\
+    \abs{6}_2 = \cfrac{1}{2}\\
+    \abs{13}_4 = 1
+\end{eqnarray*}
+
+Теперь когда мы задали норму в протсранстве $\mathbb{Q}_p$. 
+Таким образом любое чило из $\mathbb{Q}$ можно записать в следующем виде:
+
+\begin{equation}
+    \label{def:sum}
+    x = \sum_{\gamma}^{\infty} x_i p^i
+\end{equation}
+
+Где $x_i$ число в $p$ ситеме исчисления, то есть $x_i \in \mathbb{N},\ x_i < p$. 
+Может возникнуть вопрос, как такой ряд может сойтись, здесь надо не забывать, что 
+ма работаем в норме $\abs{x}_p$ тоесть ряд будет иметь норму $p^{-\gamma}$.
+Приэтом чиcла в таком виде записыватся следющим образом:
+
+\begin{equation}
+    x = \overline{x_{\infty} ... x_{\gamma + 1} x_{\gamma} ... x_{0}. x_{-1} ... x_{-\gamma}}_p
+\end{equation}
+
+Например:
+
+\begin{eqnarray*}
+    123 = 123_{10}\\
+    123 = 11120_3\\
+    -123 = 9...999877_{10} = (9)877_{10}\\
+    -\cfrac{1}{49} = (6).66_7
+\end{eqnarray*}
+
+\begin{equation}
+    \label{def:metric}
+    \rho_p\inner{x, y} = \abs{x - y}_p  
+\end{equation}
+
+Все критерии мерики очевидно выполнятся для $\rho_p$. Напомню
+что это:
+\begin{itemize}
+    \item[1] $\rho\inner{x, y} \geq 0, \   \rho\inner{x, x} = 0$
+    \item[2] $\rho\inner{x, y} = \rho\inner{y, x}$
+    \item[3] $\rho\inner{x, y} \leq \rho\inner{x, z} + \rho\inner{z, y}$ 
+\end{itemize} 
+
+
+Но у данной метрики есть одно важное свойство, котрое позже пригодится 
+нам при расчете интегралов:
+
+\begin{equation}
+    \label{def:ultra}
+    \rho \inner{x, y} \leq max\inner{\rho \inner{x, z}, \rho \inner{z, y}}
+\end{equation}
+
+По сути я доказал это в \ref{def:sum}. Пространства 
+чья метрика удовлетворят условию \ref{def:ultra} называтся 
+ультраметрическими.
+
+
+
+\section{Предельный переход $\mathbb{Q}_p \to \mathbb{Q}$}
+
+Для понимания работы $p$ - адических чисел может быть очень полезно понимать,
+что $\mathbb{Q}_p$ есть более общий случай $\mathbb{Q}$.
+
+Можно лекко заметить что $\mathbb{Q} = \mathbb{Q}_{\infty}$, действительно для 
+$\forall x \in \mathbb{Q}$ при $p = \infty, \nexists \gamma \neq 0$ 
+чтобы предствить число в виде \ref{def:p_adic}. Тогда $\gamma = 0$ 
+получается из \ref{def:p_adic} мы получим:
+
+\begin{equation}
+    p^0 \cfrac{m}{n} = \cfrac{m}{n}
+\end{equation}
+
+Что совпадает с определением $\mathbb{Q}$. И так выполнятся равентво
+
+\begin{equation}
+    \prod_2^{\infty} \abs{x}_i = 1
+\end{equation}
+
+Где $\abs{x}_{\infty} = \abs{x}$ тоесть норме р $\mathbb{Q}$ соответственно.
+
+\section{Шары в $\mathbb{Q}_p$}
+
+
+Шар в $\mathbb{Q}_p$ задается как это принято в мат. анлизе:
+
+\begin{equation}
+    \label{def:sp}
+    B_\gamma \inner{a} = \infig{x \in \mathbb{Q}_p  \ \vline \ \rho \inner{x, a} \leq p^\gamma}
+\end{equation}
+
+Шары в $\mathbb{Q}_p$ обладают очнень не привычными нам примитивным обитателям из $\mathbb{R}_{3, 1}$ свойствами:
+\begin{itemize}
+    \item[1] Любая тока шара являтся ее центром
+    \item[2] $\forall B_1 , B_2; B_1 \cap B_2 \neq 0 \per B_1 \in B_2 \ \lor B_2 \ \in B_1$
+    \item[3] $\forall B_1$ открыт
+\end{itemize}
+
+Первое свойство это следствие ультра метричности пространства:
+\begin{equation*}
+    \forall x \in B_\gamma \inner{a} \per r = \rho \inner{a, z} 
+    \leq max\inner{\rho \inner{x, a}, \rho \inner{x, z}}  
+\end{equation*}
+
+Так:
+
+\begin{equation*}
+    \rho \inner{x, a} \leq max \inner{\abs{z}_p, \abs{a}_p}, \rho \inner{x, z} \leq max \inner{\abs{x}_p, \abs{z}_p} \Rightarrow \rho \inner{x, a} \geq \rho \inner{x, z}
+\end{equation*}
+
+\begin{equation*}
+    r = \rho \inner{a, z} \leq \rho \inner{x, a}, \ \rho \inner{a, z} \geq \rho \inner{x, a} \Rightarrow \rho \inner{a, z} = \rho \inner{x, a}
+\end{equation*}
+
+Второе свойство, можно легко доказать используя первое свойство:
+\begin{equation*}
+    \forall a \in B_1 \cap B_2,\forall z_1 \in B_1,\forall z_2 \in B_2 \Rightarrow B_1 := B_{r_1} \inner{a}, B_2 := B_{r_2} \inner{a}
+\end{equation*}
+
+Тоесть в качестве центра каждого шара мы можем выбрать любую точку из пересечения, допуская что $r_1 \leq r_2$
+
+\begin{equation*}
+    \rho \inner{a, z_1} \leq r_1 \leq r_2, \rho \inner{a, z_2} \leq r_2 \Rightarrow z_1 \in B_1, B_2
+\end{equation*}
+
+Третье свойство, я не буду доказывать, но отмечу, что так как кольцо $\mathbb{Q}$ не содержит 
+своих предельных точек следовательно $\mathbb{Q}_p$ не содержит своих передльных точект, значит подможетво 
+$B$ тоже не будет содержать предельных точек, что как мы знаем соответствует открытости множества.
+
+\section{Интегрирование}
+
+
+\subsection*{Мера Хаара}
+
+
+
+
+
+
+
